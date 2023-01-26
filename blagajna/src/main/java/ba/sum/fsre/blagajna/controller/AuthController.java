@@ -27,7 +27,7 @@ public class AuthController {
     }
 
     @PostMapping("/register_user")
-    public String registerUser (@Valid Konobar konobar, KonobarRepository konobarRepo, BindingResult result, Model model) {
+    public String registerUser (@Valid Konobar konobar, BindingResult result, Model model) {
         boolean errors = result.hasErrors();
         if (errors) {
             return "register_form";
