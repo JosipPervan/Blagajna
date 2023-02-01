@@ -12,7 +12,7 @@
       <div class="card shadow-2-strong" style="border-radius: 1rem;">
         <div class="card-body p-5 text-center"  style="border-radius: 1rem;">
           <h3>Prijava na sustav</h3>
-          <form th:action="@{/login}" th:object="${user}" method="post">
+          <form th:action="@{/login}" th:object="${konobar}" method="post">
             <div class="m-3">
               <div th:if="${param.error}" class="alert alert-danger">Pogrešni korisnički podaci, pokušajte ponovo.</div>
               <div class="form-group row">

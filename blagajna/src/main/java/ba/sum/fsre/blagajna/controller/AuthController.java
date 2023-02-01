@@ -22,7 +22,7 @@ public class AuthController {
     }
     @GetMapping("/register")
     public String showRegistrationForm (Model model) {
-        model.addAttribute("user", new Konobar());
+        model.addAttribute("konobar", new Konobar());
         return "register_form";
     }
 
@@ -30,6 +30,7 @@ public class AuthController {
     public String registerUser (@Valid Konobar konobar, BindingResult result, Model model) {
         boolean errors = result.hasErrors();
         if (errors) {
+            model.addAttribute("konobar", konobar);
             return "register_form";
         }
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -43,7 +44,7 @@ public class AuthController {
 
     @GetMapping("/login")
     public String showLoginForm(Model model){
-        model.addAttribute("user", new Konobar());
+        model.addAttribute("konobar", new Konobar());
         return "login_form";
     }
 }
