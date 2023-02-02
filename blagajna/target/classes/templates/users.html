@@ -8,11 +8,11 @@
 </head>
 <body style="background-color: whitesmoke">
 <header class="navbar bg-white navbar-light sticky-top flex-md-nowrap p-0 shadow">
-  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Knjižnica</a>
+  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Blagajna</a>
   <div>
     <div class="dropdown text-end">
       <a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-5" data-bs-toggle="dropdown" th:text="${userDetails.getFullName()}" href="#"></a>
-      <ul class="dropdown-menu">0
+      <ul class="dropdown-menu">
         <li>
           <form th:action="@{/logout}" method="post">
             <input class="dropdown-item"  type="submit" value="Odjavite se" />
@@ -28,7 +28,7 @@
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav nav-pills flex-column">
           <li class="nav-item"><a aria-current="page" class="nav-link active" href="users">Korisnici</a></li>
-          <li class="nav-item"><a class="nav-link" href="books">Knjige</a></li>
+          <li class="nav-item"><a class="nav-link" href="proizvodi">Proizvodi</a></li>
         </ul>
       </div>
     </nav>

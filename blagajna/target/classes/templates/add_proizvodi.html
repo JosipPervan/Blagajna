@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Dodaj proizvod</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Dodaj proizvod</h1>
+  </div>
+
+  <form th:action="@{/proizvodi/add}" method="post" th:object="${proizvodi}">
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Naziv proizvoda: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('naziv')}" type="text" th:field="*{naziv}" class="form-control"/>
+        <input th:if="${#fields.hasErrors('naziv')}" type="text" th:field="*{naziv}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('naziv')}" th:errors="*{naziv}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Kategorija: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('kategorija')}" type="text" th:field="*{kategorija}" class="form-control"/>
+        <input th:if="${#fields.hasErrors('kategorija')}" type="text" th:field="*{kategorija}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('kategorija')}" th:errors="*{kategorija}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Cijena: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('cijena')}" type="text" th:field="*{cijena}"
+               class="form-control"/>
+        <input th:if="${#fields.hasErrors('cijena')}" type="text" th:field="*{cijena}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('cijena')}" th:errors="*{cijena}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Dodaj proizvod</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>
