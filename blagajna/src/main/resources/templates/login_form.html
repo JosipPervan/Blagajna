@@ -2,10 +2,67 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Knjižnica - Prijava na sustav</title>
+  <title>Blagajna - Prijava na sustav</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <style>
+    .sidebar {
+      background-color: #f0f0f0;
+      height: 100vh;
+      width: 200px;
+      float: left;
+    }
+
+
+  </style>
+
+
+
 </head>
+
+<!--
+
+              *** OVAJ DIO JE ZA DODAVANJE GUMBA POMOCU TH FUNKCIJE KOJA NAM NE RADI ***
+
+
+  <button class="btn btn-primary add-value-button"> th:text="${konobar.email}"</button>
+
+-->
+
 <body style="background-color: whitesmoke">
+<div class="sidebar">
+<div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 200px; height: 100vh">
+  <hr>
+
+  <!--th:each="konobar: ${listUsers}"  ******* OVO ZELIMO STAVIT AL NE IDE ********-->
+
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <a href="#" class="nav-link link-dark">
+        <button id="addValueButton" class="btn btn-primary">Josip Pervan</button>
+        <script>
+          document.addEventListener("DOMContentLoaded", function() {
+            const addValueButton = document.querySelector('#addValueButton');
+            const emailInput = document.querySelector('#emailInput');
+
+            addValueButton.addEventListener('click', () => {
+              emailInput.value = 'josip.pervan@gmail.com';
+            });
+          });
+        </script>
+      </a>
+    </li>
+  </ul>
+  <hr>
+</div>
+</div>
+
+
+
+
+
+
+
 <div class="container vh-100">
   <div class="row d-flex justify-content-center align-items-center h-100">
     <div class="col-6">
@@ -13,12 +70,13 @@
         <div class="card-body p-5 text-center"  style="border-radius: 1rem;">
           <h3>Prijava na sustav</h3>
           <form th:action="@{/login}" th:object="${konobar}" method="post">
+
             <div class="m-3">
               <div th:if="${param.error}" class="alert alert-danger">Pogrešni korisnički podaci, pokušajte ponovo.</div>
               <div class="form-group row">
                 <label class="col-4 col-form-label">E-mail </label>
                 <div class="col-8">
-                  <input type="email" th:field="*{email}" class="form-control" required />
+                  <input type="email" id="emailInput" th:field="*{email}" class="form-control" required />
                 </div>
               </div>
               <div class="form-group row">
@@ -33,12 +91,15 @@
               </div>
               <div>
                 <a href="register" class="mt-2 btn btn-block btn-outline-secondary">Registriraj se</a>
+
               </div>
             </div>
           </form>
         </div>
       </div>
     </div>
+  </div>
+</div>
   </div>
 </div>
 </body>

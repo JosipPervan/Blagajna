@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout}">
+<head>
+  <meta charset="UTF-8">
+  <title>Uredi konobara</title>
+</head>
+<body>
+<div layout:fragment="content">
+  <div class="d-flex align-items-center justify-content-between">
+    <h1>Uredi konobara</h1>
+  </div>
+
+  <form th:action="@{/users/update/{id}(id=${konobar.id})}" method="post" th:object="${konobar}">
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Email: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('email')}" type="text" th:field="*{email}" class="form-control"/>
+        <input th:if="${#fields.hasErrors('email')}" type="text" th:field="*{email}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Lozinka: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('password')}" type="text" th:field="*{password}" class="form-control"/>
+        <input th:if="${#fields.hasErrors('password')}" type="text" th:field="*{password}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Ime: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('firstname')}" type="text" th:field="*{firstname}"
+               class="form-control"/>
+        <input th:if="${#fields.hasErrors('firstname')}" type="text" th:field="*{firstname}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('firstname')}" th:errors="*{firstname}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-4 col-form-label">Prezime: </label>
+      <div class="col-8">
+        <input th:unless="${#fields.hasErrors('lastname')}" type="text" th:field="*{lastname}"
+               class="form-control"/>
+        <input th:if="${#fields.hasErrors('lastname')}" type="text" th:field="*{lastname}"
+               class="form-control  is-invalid"/>
+        <div th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}" class="invalid-feedback"></div>
+      </div>
+    </div>
+
+    <div>
+      <button type="submit" class="btn btn-primary">Uredi konobara</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

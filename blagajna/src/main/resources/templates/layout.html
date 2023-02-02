@@ -14,11 +14,11 @@
 </head>
 <body style="background-color: whitesmoke">
 <header class="navbar bg-white navbar-light sticky-top flex-md-nowrap p-0 shadow">
-  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Knjižnica</a>
+  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Blagajna</a>
   <div>
     <div class="dropdown text-end">
-      <a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-5" data-bs-toggle="dropdown"
-         th:text="${konobarDetails.getFullName()}" href="#"></a>
+      <!--<a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-5" data-bs-toggle="dropdown"
+         th:text="${userDetails.getFullName()}" href="#"></a> NEĆE PA NEĆE-->
       <ul class="dropdown-menu">
         <li>
           <form th:action="@{/logout}" method="post">
@@ -34,8 +34,8 @@
     <nav class="col-2 d-md-block sidebar collapse">
       <div class="position-sticky pt-3 sidebar-sticky">
         <ul class="nav nav-pills flex-column">
-          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Korisnici')} ? 'nav-link active' : 'nav-link'" href="/users">Korisnici</a></li>
-          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Knjige')} ? 'nav-link active' : 'nav-link'" href="/books">Knjige</a></li>
+          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Konobari')} ? 'nav-link active' : 'nav-link'" href="/users">Konobari</a></li>
+          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Proizvodi')} ? 'nav-link active' : 'nav-link'" href="/proizvodi">Proizvodi</a></li>
         </ul>
       </div>
     </nav>
