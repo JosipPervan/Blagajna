@@ -1,38 +1,156 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Knjižnica - Prijava na sustav</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blagajna - Prijava na sustav</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <style>
+    .sidebar {
+      background-color: #f0f0f0;
+      height: 100vh;
+      width: 200px;
+      float: left;
+    }
+
+    .boja{
+        background-color: rgba(87, 82, 82, 0.228);
+
+    }
+
+    .row {
+  height: 250px;
+  } 
+  
+
+  .sifra_height{
+      height: 50px;  /* Visina za polje od sifre ali ne radi ovako */
+  }
+
+
+  .brisi{
+    grid-row: 3 / 5;
+
+  }
+
+  .calculator-keys {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 10px;
+
+}
+  
+.null-sign {
+  height: 100%;
+  grid-row: 4 / 5;
+  grid-column: 1 / 4;
+}
+
+.ok{
+  grid-row: 3 / 5;
+  grid-column: 5 / 7;
+}
+
+  </style>
+
+
+
 </head>
+
 <body style="background-color: whitesmoke">
-<div class="container vh-100">
+    <div class="sidebar">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light" style="width: 200px; height: 100vh">
+          <hr>
+      
+          <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+              <a href="#" class="nav-link link-dark">
+                <button th:each="konobar: ${listKonobars}" th:text="${konobar.getFullname()}" data-th-value="${konobar.email}" class="btn btn-primary d-block p-5 addValueButton mb-2"></button>
+                <script>
+                  const addValueButtons = document.getElementsByClassName('addValueButton');
+      
+                  var setEmail = function() {
+                    var email = this.getAttribute("value");
+                    document.getElementById('emailInput').value = email;
+                  };
+      
+                  for (var i = 0; i < addValueButtons.length; i++) {
+                    addValueButtons[i].addEventListener('click', setEmail, false);
+                  }
+                </script>
+              </a>
+            </li>
+          </ul>
+          <hr>
+        </div>
+      </div>
+
+
+<!-- Odavde pocinje main, iznad je sidebar -->
+
+<div class="container vh-100"> 
   <div class="row d-flex justify-content-center align-items-center h-100">
-    <div class="col-6">
-      <div class="card shadow-2-strong" style="border-radius: 1rem;">
-        <div class="card-body p-5 text-center"  style="border-radius: 1rem;">
+    <div class="col-8"> <!-- Broj 8... ide do 12 i odreduje sirinu kocke za kalkulator... gore u cssu ima row height to odreduje visinu-->
+      <div class="card shadow-3-strong boja" style="border-radius: 3rem;">
+        <div class="card-body p-4 text-center"  style="border-radius: 1rem;">
+
+          <!-- Ovo iznad postavlja kocku za kalkulator -->
+
           <h3>Prijava na sustav</h3>
           <form th:action="@{/login}" th:object="${konobar}" method="post">
-            <div class="m-3">
-              <div th:if="${param.error}" class="alert alert-danger">Pogrešni korisnički podaci, pokušajte ponovo.</div>
-              <div class="form-group row">
+
+           
+
+              <!--<div th:if="${param.error}" class="alert alert-danger">Pogrešni korisnički podaci, pokušajte ponovo.</div> 
+              
+              Samo sam zakomentiro da mi ne smeta jer se error uvik pokazuje
+              -->
+
+              <div class="form-group row" style="display: none">
                 <label class="col-4 col-form-label">E-mail </label>
                 <div class="col-8">
-                  <input type="email" th:field="*{email}" class="form-control" required />
+                  <input type="email" id="emailInput" th:field="*{email}" class="form-control" required />
                 </div>
               </div>
-              <div class="form-group row">
-                <label class="col-4 col-form-label">Lozinka </label>
-                <div class="col-8">
+
+
+
+              <div class="form-group row justify-content-center">
+                <div class="col-10 sifra_height"> <!-- Sirina prostora za sifru -->
                   <input type="password" th:field="*{password}" class="form-control"
                          required minlength="6" maxlength="10"/>
                 </div>
-              </div>
-              <div>
-                <button type="submit" class="btn btn-block btn-primary">Prijavi se</button>
-              </div>
-              <div>
-                <a href="register" class="mt-2 btn btn-block btn-outline-secondary">Registriraj se</a>
+
+                <div class="calculator-keys">
+
+                  <button type="button" value="7">7</button>
+                  <button type="button" value="8">8</button>
+                  <button type="button" value="9">9</button>
+                  <button type="button" value="A">A</button>
+                  <button type="button" value="B">B</button>
+                  <button type="button" value="C">C</button>
+
+
+                  <button type="button" value="4">4</button>
+                  <button type="button" value="5">5</button>
+                  <button type="button" value="6">6</button>
+                  <button type="button" value="D">D</button>
+                  <button type="button" value="E">E</button>
+                  <button type="button" value="F">F</button>
+
+
+                  <button type="button" value="1">1</button>
+                  <button type="button" value="2">2</button>
+                  <button type="button" value="3">3</button>
+
+
+                  <button type="button" class="null-sign" value="0">0</button> <!-- Treba skuzit kako da ovo zauzme vise polja... 
+                    Ovo je radeno u CSSu i koristio se ovaj nacin grid-area: 2 / 4 / 6 / 5;
+                  -->
+                  <button type="button" class="brisi"  value="brisi">Brisi</button>
+                  <button type="submit" class="ok btn btn-block btn-primary" value="OK">OK</button>
+                </div>
               </div>
             </div>
           </form>
@@ -41,5 +159,9 @@
     </div>
   </div>
 </div>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" 
+integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </body>
 </html>
