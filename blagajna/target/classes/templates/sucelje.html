@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blagajna - Prijava na sustav</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <style>
+    .split {
+      height: 100%;
+      width: 70%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+      padding-left: 20px;
+      left: 0;
+    }
+
+    .split_right {
+      height: 100%;
+      width: 30%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      right: 0;
+    }
+
+    .stranica{
+      width: 50%
+    }
+
+    .sidebar {
+      background-color: #f0f0f0;
+      height: 100vh;
+      width: 500px;
+    }
+
+    .boja{
+      background-color: gray;
+    }
+
+
+    .row{
+      height: 80px;
+    }
+
+    .grid-containerProizvodi {
+      display: grid;
+      gap: 30px ;
+      grid-template-columns: auto auto auto;
+      background-color: gray;
+      margin-top: 10px;
+      padding: 20px;
+      grid-template-columns: repeat(4, 2fr);
+    }
+
+    .grid-containerKategorije{
+      display: grid;
+      grid-template-columns: repeat(5, 3fr);
+      padding: 20px;
+    }
+
+
+
+    .grid-itemP {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      font-size: 30px;
+      text-align: center;
+      height: 280px;
+      border-radius: 15px;
+    }
+
+    .grid-itemK{
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+      width: 150px;
+      height: 30px;
+      gap: 30px;
+
+    }
+    .proizvod{
+      margin-top: 50%;
+      color: pink;
+    }
+
+    .vis{
+      background-color: antiquewhite;
+      height: 80px;
+      border-radius: 10px;
+      border: solid black 2px;
+    }
+
+    .gumb{
+      height: 76px;
+    }
+
+    #bottom {
+      position: static;
+      bottom: 0;
+      left: 0;
+    }
+    p {
+      border: 1px solid blue;
+      height: 150px;
+      display: flex;/* defines flexbox */
+      flex-direction: column;/* top to bottom */
+      justify-content: space-between;/* first item at start, last at end */
+    }
+  </style>
+
+</head>
+
+<body style="background-color:  #61cbe6">
+
+<!-- Odavde pocinje main, iznad je sidebar Mirna rekla ide gas -->
+
+<div class="split">
+  <div class="container float-left p-3 vh-100">
+    <div class="row d-flex justify-content-center p-3 align-items-center h-100">
+      <div class="container h-100 justify-content-center align-items-center">
+        <div class="container vis">
+          <div class="col-12">
+            <div class="row gumb justify-content-center align-items-center" style="background-color: #08576c;">
+              <button type="button">Primary</button>
+              <button type="button">Primary</button>
+              <button type="button">Primary</button>
+              <button type="button">Primary</button>
+              <button type="button">Primary</button>
+
+            </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
+          </div>
+        </div>
+        <div class=" justify-content-center align-items-center h-100">
+          <form>
+
+            <div class="grid-containerProizvodi">
+              <div class="grid-itemP w-100">1</div>
+              <div class="grid-itemP w-100">2</div>
+              <div class="grid-itemP w-100">3</div>
+              <div class="grid-itemP w-100">4</div>
+              <div class="grid-itemP w-100">5</div>
+              <div class="grid-itemP w-100">6</div>
+              <div class="grid-itemP w-100">7</div>
+              <div class="grid-itemP w-100">8</div>
+              <div class="grid-itemP w-100">9</div>
+              <div class="grid-itemP w-100">10</div>
+              <div class="grid-itemP w-100">11</div>
+              <div class="grid-itemP w-100">12</div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="split_right">
+  <div class="container float-right h-100 mb-3">
+    <div class="d-flex flex-column flex-shrink-0 p-3 h-100 bg-light w-100">
+      <hr>
+      <ul class="nav nav-pills flex-column mb-auto">
+        <li class="nav-item">
+          <a href="#" th:class="${#strings.equals(activeLink, 'Proizvodi')} ? 'nav-link active' : 'nav-link'">
+            <button th:each="konobar: ${listKonobars}" th:text="${konobar.getFullname()}" data-th-value="${konobar.email}"
+                    class="btn btn-info d-block addValueButton btn-block gumb" style="background-image: linear-gradient(#08576c , #52b7be );">
+            </button>
+          </a>
+        </li>
+      </ul>
+      <hr>
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+
+<script>
+
+
+  const addValueButtons = document.getElementsByClassName('addValueButton');
+
+  var setEmail = function() {
+    var email = this.getAttribute("value");
+    document.getElementById('emailInput').value = email;
+  };
+
+  for (var i = 0; i < addValueButtons.length; i++) {
+    addValueButtons[i].addEventListener('click', setEmail, false);
+  }
+
+
+
+  document.addEventListener('DOMContentLoaded', function() {
+    var textbox = document.querySelector("#userPinInput");
+    var pinButtons = document.querySelectorAll(".pinNum");
+
+    pinButtons.forEach(function(btn) {
+      btn.addEventListener("click", function(e) {
+        textbox.value += this.value;
+      });
+    });
+  });;
+
+
+</script>
+
+</body>
+</html>

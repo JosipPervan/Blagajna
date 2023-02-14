@@ -11,6 +11,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class AuthController {
     @Autowired
@@ -33,18 +35,22 @@ public class AuthController {
             model.addAttribute("konobar", konobar);
             return "register_form";
         }
+
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(konobar.getPassword());
         konobar.setPasswordRepeat(encodedPassword);
         konobar.setPassword(encodedPassword);
         konobarRepo.save(konobar);
-        return "register_success";
+        return "redirect:/users";
     }
 
 
     @GetMapping("/login")
     public String showLoginForm(Model model){
+        List<Konobar> listKonobars = konobarRepo.findAll();
         model.addAttribute("konobar", new Konobar());
+        model.addAttribute("listKonobars", listKonobars);
+        model.addAttribute("listKonobars", listKonobars);
         return "login_form";
     }
 }
