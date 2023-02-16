@@ -20,6 +20,18 @@ public class Konobar {
     @NotBlank(message="Molimo ponovite Vašu lozinku.")
     private String passwordRepeat;
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    @NotBlank(message="Molimo unesite ulogu.")
+    @Column(columnDefinition="varchar(255) default 'admin'")
+    private String role = "admin";
+
     private boolean passwordsEqual;
 
     public void setPasswordsEqual(boolean passwordsEqual) {
@@ -52,6 +64,10 @@ public class Konobar {
         this.password = password;
         this.firstname = firstname;
         this.lastname = lastname;
+    }
+
+    public String getFullname () {
+        return this.firstname + " " + this.lastname;
     }
 
     public Long getId() {

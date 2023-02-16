@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blagajna - Prijava na sustav</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+
+  <style>
+    .split {
+      height: 100%;
+      width: 70%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+      padding-left: 20px;
+      left: 0;
+    }
+
+    .split_right {
+      height: 100%;
+      width: 30%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      overflow-x: hidden;
+      padding-bottom: 20px;
+      right: 0;
+    }
+
+    body{
+      background-color: #508fa1; /*  boja pozadine  */
+    }
+    .stranica{
+      width: 50%
+    }
+
+    .sidebar {
+      background-color: #f0f0f0;
+      height: 100vh;
+      width: 500px;
+    }
+
+
+
+
+    .row{
+      height: 80px;
+    }
+
+    .grid-containerProizvodi {
+      display: grid;
+      gap: 30px ;
+      grid-template-columns: auto auto auto;
+      background-color: #95c0cc; /*  boja pozadine proizvoda */
+      margin-top: 10px;
+      padding: 20px;
+      grid-template-columns: repeat(4, 2fr);
+    }
+
+    .grid-containerKategorije{
+      display: grid;
+      grid-template-columns: repeat(5, 3fr);
+      padding: 20px;
+    }
+
+
+
+    .grid-itemP {
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      font-size: 30px;
+      text-align: center;
+      height: 280px;
+      border-radius: 15px;
+    }
+
+    .grid-itemK{
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(0, 0, 0, 0.8);
+      padding: 20px;
+      font-size: 30px;
+      text-align: center;
+      width: 150px;
+      height: 30px;
+      gap: 30px;
+
+    }
+    .proizvod{
+      margin-top: 50%;
+      color: pink;
+    }
+
+    .vis{
+      background-color: whitesmoke;
+      height: 80px;
+      border-radius: 10px;
+      border: solid black 2px;
+    }
+
+    .gumb{
+      height: 76px;
+    }
+
+    #bottom {
+      position: static;
+      bottom: 0;
+      left: 0;
+    }
+    .one {
+      float: left;
+      text-align: left;
+      font-weight: bold;
+    }
+    .two {
+      float: right;
+      text-align: right;
+      font-weight: bold;
+    }
+
+    .pill-nav a {
+      display: inline-block;
+      color: black;
+      text-align: center;
+      padding: 14px;
+      margin-right: 45px;
+      text-decoration: none;
+      font-size: 17px;
+      border-radius: 5px;
+    }
+
+    /* Change the color of links on mouse-over */
+    .pill-nav a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    /* Add a color to the active/current link */
+    .pill-nav a.active {
+      background-image: linear-gradient(#074455 , #3dabb3 );
+      color: white;
+    }
+
+    .gb{
+      height: 3rem;
+      font-size: 15px;
+    }
+
+    .razmak {
+      display: grid;
+      grid-template-columns: repeat(6, 2fr);
+      grid-gap: 5px;
+    }
+
+
+
+  </style>
+</head>
+<body>
+<div class="pozadina">
+  <!-- Odavde pocinje main, iznad je sidebar Mirna rekla ide gas -->
+
+  <div class="split">
+    <div class="container float-left p-3 vh-100">
+      <div class="row d-flex justify-content-center p-3 align-items-center h-100">
+        <div class="container h-100 justify-content-center align-items-center">
+          <div class="container vis">
+            <div class="col-12">
+              <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
+                <div class="col-12">
+                <div class="pill-nav">
+                  <div class="razmak">
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()">Topli napitci</button>
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showBezalkoholna()">Bezalkoholna pića</button>
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showAlkoholna()">Alkoholna pića</button>
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showPiva()">Piva</button>
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showKokteli()">Kokteli</button>
+                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showVina()">Vina</button>
+                  </div>
+                  </div>
+                </div>
+              </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
+            </div>
+          </div>
+          <div id="topli">
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one"></span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div id="bezalkoholna" hidden>
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Kava</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Bijela Kava</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div id="piva" hidden>
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Žuja</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Karlovačko</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div id="alkoholna" hidden>
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Jeger</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Jack</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div id="kokteli" hidden>
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Mojito</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Sex on the tree</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+
+          <div id="vina" hidden>
+            <div class=" justify-content-center align-items-center h-100">
+              <form>
+                <div class="grid-containerProizvodi">
+
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Bijelo</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" >
+                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                    <div class="card-body" style=" height: 4rem;">
+                      <div>
+                        <span class="one">Crno</span><span class="two">2,00 KM</span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+      <div class="split_right pt-3">
+        <div class="container float-right h-100 justify-content-center align-items-center">
+          <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100">
+            <div class="justify-content-center align-items-center w-100" >
+              <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                  <button
+                          class="vis btn btn-info d-block addValueButton btn-block gumb" style="background-color: whitesmoke; color: black; font-size: xx-large;"  th:text="${userDetails.getFullName()}">
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+  const addValueButtons = document.getElementsByClassName('addValueButton');
+
+  var setEmail = function() {
+    var email = this.getAttribute("value");
+    document.getElementById('emailInput').value = email;
+  };
+
+  for (var i = 0; i < addValueButtons.length; i++) {
+    addValueButtons[i].addEventListener('click', setEmail, false);
+  }
+
+
+  function showTopli() {
+    document.getElementById("topli").removeAttribute("hidden");
+    document.getElementById("bezalkoholna").setAttribute("hidden", "");
+    document.getElementById("alkoholna").setAttribute("hidden", "");
+    document.getElementById("piva").setAttribute("hidden", "");
+    document.getElementById("kokteli").setAttribute("hidden", "");
+    document.getElementById("vina").setAttribute("hidden", "");
+  }
+
+  function showBezalkoholna() {
+    document.getElementById("bezalkoholna").removeAttribute("hidden");
+    document.getElementById("topli").setAttribute("hidden", "");
+    document.getElementById("alkoholna").setAttribute("hidden", "");
+    document.getElementById("piva").setAttribute("hidden", "");
+    document.getElementById("kokteli").setAttribute("hidden", "");
+    document.getElementById("vina").setAttribute("hidden", "");
+  }
+
+  function showAlkoholna() {
+    document.getElementById("alkoholna").removeAttribute("hidden");
+    document.getElementById("topli").setAttribute("hidden", "");
+    document.getElementById("bezalkoholna").setAttribute("hidden", "");
+    document.getElementById("piva").setAttribute("hidden", "");
+    document.getElementById("kokteli").setAttribute("hidden", "");
+    document.getElementById("vina").setAttribute("hidden", "");
+  }
+
+  function showPiva() {
+    document.getElementById("piva").removeAttribute("hidden");
+    document.getElementById("topli").setAttribute("hidden", "");
+    document.getElementById("bezalkoholna").setAttribute("hidden", "");
+    document.getElementById("alkoholna").setAttribute("hidden", "");
+    document.getElementById("kokteli").setAttribute("hidden", "");
+    document.getElementById("vina").setAttribute("hidden", "");
+  }
+
+  function showKokteli() {
+    document.getElementById("kokteli").removeAttribute("hidden");
+    document.getElementById("topli").setAttribute("hidden", "");
+    document.getElementById("bezalkoholna").setAttribute("hidden", "");
+    document.getElementById("alkoholna").setAttribute("hidden", "");
+    document.getElementById("piva").setAttribute("hidden", "");
+    document.getElementById("vina").setAttribute("hidden", "");
+  }
+
+  function showVina() {
+    document.getElementById("vina").removeAttribute("hidden");
+    document.getElementById("topli").setAttribute("hidden", "");
+    document.getElementById("bezalkoholna").setAttribute("hidden", "");
+    document.getElementById("alkoholna").setAttribute("hidden", "");
+    document.getElementById("piva").setAttribute("hidden", "");
+    document.getElementById("kokteli").setAttribute("hidden", "");
+  }
+
+
+
+
+</script>
+</body>
+</html>
