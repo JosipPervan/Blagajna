@@ -30,7 +30,7 @@ public class Konobar {
 
     @NotBlank(message="Molimo unesite ulogu.")
     @Column(columnDefinition="varchar(255) default 'admin'")
-    private String role = "admin";
+    private String role = "konobar";
 
     private boolean passwordsEqual;
 

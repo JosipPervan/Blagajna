@@ -32,18 +32,6 @@
     body{
       background-color: #508fa1; /*  boja pozadine  */
     }
-    .stranica{
-      width: 50%
-    }
-
-    .sidebar {
-      background-color: #f0f0f0;
-      height: 100vh;
-      width: 500px;
-    }
-
-
-
 
     .row{
       height: 80px;
@@ -59,39 +47,6 @@
       grid-template-columns: repeat(4, 2fr);
     }
 
-    .grid-containerKategorije{
-      display: grid;
-      grid-template-columns: repeat(5, 3fr);
-      padding: 20px;
-    }
-
-
-
-    .grid-itemP {
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      font-size: 30px;
-      text-align: center;
-      height: 280px;
-      border-radius: 15px;
-    }
-
-    .grid-itemK{
-      background-color: rgba(255, 255, 255, 0.8);
-      border: 1px solid rgba(0, 0, 0, 0.8);
-      padding: 20px;
-      font-size: 30px;
-      text-align: center;
-      width: 150px;
-      height: 30px;
-      gap: 30px;
-
-    }
-    .proizvod{
-      margin-top: 50%;
-      color: pink;
-    }
-
     .vis{
       background-color: whitesmoke;
       height: 80px;
@@ -103,11 +58,6 @@
       height: 76px;
     }
 
-    #bottom {
-      position: static;
-      bottom: 0;
-      left: 0;
-    }
     .one {
       float: left;
       text-align: left;
@@ -130,13 +80,11 @@
       border-radius: 5px;
     }
 
-    /* Change the color of links on mouse-over */
     .pill-nav a:hover {
       background-color: #ddd;
       color: black;
     }
 
-    /* Add a color to the active/current link */
     .pill-nav a.active {
       background-image: linear-gradient(#074455 , #3dabb3 );
       color: white;
@@ -145,6 +93,7 @@
     .gb{
       height: 3rem;
       font-size: 15px;
+      border: 1px solid black;
     }
 
     .razmak {
@@ -154,18 +103,17 @@
     }
 
 
-
   </style>
 </head>
 <body>
 <div class="pozadina">
-  <!-- Odavde pocinje main, iznad je sidebar Mirna rekla ide gas -->
+  <!-- Odavde pocinje main, iznad je sidebar-->
 
   <div class="split">
     <div class="container float-left p-3 vh-100">
       <div class="row d-flex justify-content-center p-3 align-items-center h-100">
         <div class="container h-100 justify-content-center align-items-center">
-          <div class="container vis">
+          <div class="container vis" style="background-color: #95c0cc">
             <div class="col-12">
               <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
                 <div class="col-12">
@@ -186,7 +134,7 @@
           <div id="topli">
             <div class=" justify-content-center align-items-center h-100">
               <form>
-                <div class="grid-containerProizvodi">
+                <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
 
                   <div class="card" >
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
@@ -342,18 +290,25 @@
       </div>
 
 
-      <div class="split_right pt-3">
+      <div class="split_right pt-3" style="position: fixed">
         <div class="container float-right h-100 justify-content-center align-items-center">
-          <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100">
-            <div class="justify-content-center align-items-center w-100" >
-              <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                  <button
-                          class="vis btn btn-info d-block addValueButton btn-block gumb" style="background-color: whitesmoke; color: black; font-size: xx-large;"  th:text="${userDetails.getFullName()}">
-                  </button>
-                </li>
-              </ul>
+          <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
+
+            <div class="h-100" style="display: flex;">
+              <button
+                      class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
+              </button>
             </div>
+              <div style="align-items: end;">
+              <button class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;">Račun</button>
+              </div>
+              </div>
+          </div>
+
+            </div>
+          </div>
+
+
           </div>
         </div>
       </div>

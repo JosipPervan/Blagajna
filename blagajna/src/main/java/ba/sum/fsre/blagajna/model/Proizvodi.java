@@ -3,6 +3,10 @@ package ba.sum.fsre.blagajna.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.math.BigDecimal;
+import java.util.Objects;
+
+import java.util.Currency;
 
 @Entity
 @Table(name="proizvodi")
@@ -20,12 +24,18 @@ public class Proizvodi {
     @Enumerated(EnumType.STRING)
     private Kategorija kategorija;
 
+    @Column(precision = 10, scale = 2, nullable = false)
+    @NotNull(message = "Molimo unesite cijenu proizvoda.")
+    BigDecimal cijena;
+
     @Column(length = 50, nullable = false)
-    @NotBlank(message = "Molimo unesite cijenu proizvoda.")
-    String cijena;
+    @NotBlank(message = "Molimo unesite valutu.")
+    String valuta;
+
+
 
     public Proizvodi(){}
-    public Proizvodi(Long id, String naziv, Kategorija kategorija, String cijena) {
+    public Proizvodi(Long id, String naziv, Kategorija kategorija, BigDecimal cijena) {
         this.id = id;
         this.naziv = naziv;
         this.kategorija = kategorija;
@@ -56,14 +66,46 @@ public class Proizvodi {
         this.kategorija = kategorija;
     }
 
-    public String getCijena() {
+    public BigDecimal getCijena() {
         return cijena;
     }
 
-    public void setCijena(String cijena) {
+    public void setCijena(BigDecimal cijena) {
         this.cijena = cijena;
     }
 
+    public String getValuta() {
+        return valuta;
+    }
+
+    public void setValuta(String valuta) {
+        this.valuta = valuta;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Proizvodi proizvodi = (Proizvodi) o;
+        return Objects.equals(id, proizvodi.id) && Objects.equals(naziv, proizvodi.naziv) && Objects.equals(kategorija, proizvodi.kategorija) && Objects.equals(cijena, proizvodi.cijena) && Objects.equals(valuta, proizvodi.valuta);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, naziv, kategorija, cijena, valuta);
+    }
+
+    @Override
+    public String toString() {
+        return "Proizvodi{" +
+                "id=" + id +
+                ", naziv='" + naziv + '\'' +
+                ", kategorija='" + kategorija + '\'' +
+                ", cena=" + cijena +
+                ", valuta='" + valuta + '\'' +
+                '}';
+    }
 
 }
 

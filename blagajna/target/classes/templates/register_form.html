@@ -64,6 +64,23 @@
                                 </div>
                             </div>
 
+
+                            <div class="form-group row">
+                                <label class="col-4 col-form-label">Uloga: </label>
+                                <div class="col-8">
+                                    <select th:unless="${#fields.hasErrors('role')}" th:field="*{role}" class="form-control">
+                                        <option value="konobar">Konobar</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                    <select th:if="${#fields.hasErrors('role')}" th:field="*{role}" class="form-control is-invalid">
+                                        <option value="konobar">Konobar</option>
+                                        <option value="admin">Admin</option>
+                                    </select>
+                                    <div th:if="${#fields.hasErrors('role')}" th:errors="*{role}" class="invalid-feedback"></div>
+                                </div>
+                            </div>
+
+
                             <div>
                                 <button type="submit" class="btn btn-block btn-primary">Registracija</button>
                             </div>
