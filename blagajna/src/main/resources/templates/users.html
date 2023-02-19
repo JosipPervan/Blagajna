@@ -5,7 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Blagajna - Prijava na sustav</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+          crossorigin="anonymous"></script>
   <style>
     .sidebar {
       background-color: #599fb3;
@@ -40,15 +42,12 @@
 </head>
 
 <body style="background-color:  #89bed1">
-<header class="navbar  navbar-light sticky-top flex-md-nowrap p-0 shadow">
-
-  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6" style="color:white;">Blagajna</a>
+<header class="navbar bg-white navbar-light sticky-top flex-md-nowrap p-0 shadow">
+  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Blagajna</a>
   <div>
     <div class="dropdown text-end">
-      <a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-2" data-bs-toggle="dropdown" style="color: white; border: 1px solid rgb(255, 255, 255); background-image: linear-gradient(#08576c , #08576c);">Pavo Veličanstveni</a>
-
-      <!--th:text="${userDetails.getFullName()}" href="#"></a> -->
-
+      <a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-5" data-bs-toggle="dropdown"
+         th:text="${userDetails.getFullName()}" href="#"></a>
       <ul class="dropdown-menu">
         <li>
           <form th:action="@{/logout}" method="post">
@@ -60,13 +59,12 @@
   </div>
 </header>
 
-
 <div class="sidebar">
   <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 300px; height: 100vh">
     <nav class="col-2 d-md-block sidebar collapse">
-      <div class="position-sticky pt-3 sidebar-sticky">
-        <ul class="nav nav-pills flex-column">
-          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Konobari')} ? 'nav-link active' : 'nav-link'" href="/users">Konobari</a></li>
+      <div class="position-sticky pt-3 sidebar-sticky ">
+        <ul class="nav nav-pills flex-column ">
+          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Konobar')} ? 'nav-link active' : 'nav-link'" href="/users">Konobari</a></li>
           <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Proizvodi')} ? 'nav-link active' : 'nav-link'" href="/proizvodi">Proizvodi</a></li>
         </ul>
       </div>
@@ -100,8 +98,8 @@
           <td th:text="${konobar.email}">E-mail</td>
           <td th:text="${konobar.firstname}">First Name</td>
           <td th:text="${konobar.lastname}">Last Name</td>
-          <td><a class="btn btn-info" th:href="@{/users/edit/{id}(id=${konobar.id})}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-          <td><a class="btn btn-danger" th:href="@{/users/delete/{id}(id=${konobar.id})}"><i class="fa-solid fa-trash"></i></a></td>
+          <td><a class="btn btn-info" th:href="@{/users/edit/{id}(id=${konobar.id})}"><i class="fa-solid fa-pen-to-square">Uredi</i></a></td>
+          <td><a class="btn btn-danger" th:href="@{/users/delete/{id}(id=${konobar.id})}"><i class="fa-solid fa-trash"></i>Izbriši</a></td>
         </tr>
 
         </tbody>

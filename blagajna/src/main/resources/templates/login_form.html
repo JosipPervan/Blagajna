@@ -119,7 +119,7 @@
 
     <ul class="nav nav-pills flex-column mb-auto">
       <li class="nav-item">
-        <a href="#" th:class="${#strings.equals(activeLink, 'Proizvodi')} ? 'nav-link active' : 'nav-link'">
+        <a href="#" th:class="${#strings.equals(activeLink, 'Konobar')} ? 'nav-link active' : 'nav-link'">
           <button th:each="konobar: ${listKonobars}" th:text="${konobar.getFullname()}" data-th-value="${konobar.email}"
                   class="btn btn-info d-block p-5 addValueButton btn-block gumbsidebar" style="background-image: linear-gradient(#08576c , #52b7be );"
 

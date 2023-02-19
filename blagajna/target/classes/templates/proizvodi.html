@@ -1,38 +1,113 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"  layout:decorate="~{layout}">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blagajna - Prijava na sustav</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
 
-  <title>Prikaz proizvoda</title>
+  <style>
+    .sidebar {
+      background-color: #599fb3;
+      height: 100vh;
+      width: 20%;
+
+    }
+
+    .split {
+      height: 100%;
+      width: 80%;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      padding-right: 20px;
+      right: 0;
+    }
+
+    .custom-table {
+      background-color: rgb(186, 176, 194);
+    }
+    .theader{
+      background-color:#08576c;
+      color:white;
+    }
+
+    header.navbar {
+      background-color:#08576c;
+    }
+
+  </style>
 
 </head>
-<body>
 
-<div layout:fragment="content">
-  <div class="d-flex align-items-center justify-content-between">
-    <h1>Lista proizvoda</h1>
-    <a href="/proizvodi/add" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i> Dodaj proizvod</a>
+<body style="background-color:  #89bed1">
+<header class="navbar bg-white navbar-light sticky-top flex-md-nowrap p-0 shadow">
+  <a href="#" class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6">Blagajna</a>
+  <div>
+    <div class="dropdown text-end">
+      <a class="btn-outline btn dropdown-toggle mt-2 mb-2 mr-5" data-bs-toggle="dropdown"
+         th:text="${userDetails.getFullName()}" href="#"></a>
+      <ul class="dropdown-menu">
+        <li>
+          <form th:action="@{/logout}" method="post">
+            <input class="dropdown-item" type="submit" value="Odjavite se"/>
+          </form>
+        </li>
+      </ul>
+    </div>
   </div>
-  <table class="table table-striped table-bordered">
-    <thead class="thead-dark">
-    <tr>
-      <th>ID</th>
-      <th>Naziv</th>
-      <th>Kategorija</th>
-      <th>Cijena</th>
-      <th colspan="2">Akcije</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="proizvodi: ${listProizvodi}">
-      <td th:text="${proizvodi.id}">Proizvod ID</td>
-      <td th:text="${proizvodi.naziv}">Naziv</td>
-      <td th:text="${proizvodi.kategorija}">Kategorija</td>
-      <td th:text="${proizvodi.cijena}">Cijena</td>
-      <td><a class="btn btn-info" th:href="@{/proizvodi/edit/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-pen-to-square"></i></a></td>
-      <td><a class="btn btn-danger" th:href="@{/proizvodi/delete/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-trash"></i></a></td>
-    </tr>
-    </tbody>
-  </table>
+</header>
+
+<div class="sidebar">
+  <div class="d-flex flex-column flex-shrink-0 p-3" style="width: 300px; height: 100vh">
+    <nav class="col-2 d-md-block sidebar collapse">
+      <div class="position-sticky pt-3 sidebar-sticky">
+        <ul class="nav nav-pills flex-column">
+          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Konobari')} ? 'nav-link active' : 'nav-link'" href="/users">Konobari</a></li>
+          <li class="nav-item"><a th:class="${#strings.equals(activeLink, 'Proizvodi')} ? 'nav-link active' : 'nav-link'" href="/proizvodi">Proizvodi</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
 </div>
+
+
+<div class="container vh-100 mt-5 pt-5">
+  <div class="row split mt-5 pt-3">
+
+    <div class="align-items-center justify-content-between w-100">
+      <div class="d-flex">
+        <div class="p-2"> <h1 style="color:white;">Lista proizvoda</h1></div>
+
+        <div class="ml-auto p-2"><a href="/proizvodi/add" class="btn btn-outline-primary " style=" color: white; background-image: linear-gradient(#08576c , #08576c);"><i class="fa-solid fa-plus"></i> Dodaj proizvod</a></div>
+      </div>
+      <table class="table table-striped table-bordered custom-table" >
+        <thead class="theader" >
+        <tr>
+          <th>ID</th>
+          <th>Naziv</th>
+          <th>Kategorija</th>
+          <th>Cijena</th>
+          <th colspan="2">Akcije</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr style="color:black; background-color: #9fc7d1;" th:each="proizvodi: ${listProizvodi}">
+          <td th:text="${proizvodi.id}">Proizvod ID</td>
+          <td th:text="${proizvodi.naziv}">Naziv</td>
+          <td th:text="${proizvodi.kategorija}">Kategorija</td>
+          <td th:text="${proizvodi.cijena}">Cijena</td>
+          <td><a class="btn btn-info" th:href="@{/proizvodi/edit/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-pen-to-square">Uredi</i></a></td>
+          <td><a class="btn btn-danger" th:href="@{/proizvodi/delete/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-trash"></i>Izbriši</a></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+
+  </div>
+</div>
+</div>
+
 </body>
 </html>

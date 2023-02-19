@@ -107,7 +107,6 @@
 </head>
 <body>
 <div class="pozadina">
-  <!-- Odavde pocinje main, iznad je sidebar-->
 
   <div class="split">
     <div class="container float-left p-3 vh-100">
@@ -117,40 +116,43 @@
             <div class="col-12">
               <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
                 <div class="col-12">
-                <div class="pill-nav">
-                  <div class="razmak">
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()">Topli napitci</button>
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showBezalkoholna()">Bezalkoholna pića</button>
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showAlkoholna()">Alkoholna pića</button>
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showPiva()">Piva</button>
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showKokteli()">Kokteli</button>
-                  <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showVina()">Vina</button>
-                  </div>
+                  <div class="pill-nav">
+                    <div class="razmak">
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()">Topli napitci</button>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showBezalkoholna()">Bezalkoholna pića</button>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showAlkoholna()">Alkoholna pića</button>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showPiva()">Piva</button>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showKokteli()">Kokteli</button>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showVina()">Vina</button>
+                    </div>
                   </div>
                 </div>
-              </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
+              </div>
             </div>
           </div>
-          <div id="topli">
-            <div class=" justify-content-center align-items-center h-100">
+
+
+
+          <div class="topli">
+            <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
-
-                  <div class="card" >
+                  <div th:each="proizvod : ${proizvodi}" class="card">
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one"></span><span class="two">2,00 KM</span>
+                        <span class="one" th:text="${proizvod.getNaziv()}"></span>
+                        <span class="two" th:text="${proizvod.getCijena()} + ' KM'"></span>
                       </div>
                     </div>
                   </div>
-
                 </div>
               </form>
             </div>
           </div>
 
-          <div id="bezalkoholna" hidden>
+
+          <div class="bezalkoholna" hidden>
             <div class=" justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi">
@@ -159,7 +161,7 @@
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one">Kava</span><span class="two">2,00 KM</span>
+                        <span class="one">Jiuce</span><span class="two">2,00 KM</span>
                       </div>
                     </div>
                   </div>
@@ -167,7 +169,7 @@
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one">Bijela Kava</span><span class="two">2,00 KM</span>
+                        <span class="one">Cedevita</span><span class="two">2,00 KM</span>
                       </div>
                     </div>
                   </div>
@@ -177,7 +179,7 @@
             </div>
           </div>
 
-          <div id="piva" hidden>
+          <div class="piva" hidden>
             <div class=" justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi">
@@ -204,7 +206,7 @@
             </div>
           </div>
 
-          <div id="alkoholna" hidden>
+          <div class="alkoholna" hidden>
             <div class=" justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi">
@@ -231,7 +233,7 @@
             </div>
           </div>
 
-          <div id="kokteli" hidden>
+          <div class="kokteli" hidden>
             <div class=" justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi">
@@ -248,7 +250,7 @@
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one">Sex on the tree</span><span class="two">2,00 KM</span>
+                        <span class="one">Jagerbomb</span><span class="two">2,00 KM</span>
                       </div>
                     </div>
                   </div>
@@ -259,7 +261,7 @@
           </div>
 
 
-          <div id="vina" hidden>
+          <div class="vina" hidden>
             <div class=" justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi">
@@ -290,32 +292,44 @@
       </div>
 
 
+
       <div class="split_right pt-3" style="position: fixed">
         <div class="container float-right h-100 justify-content-center align-items-center">
           <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
 
-            <div class="h-100" style="display: flex;">
-              <button
-                      class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
-              </button>
-            </div>
-              <div style="align-items: end;">
-              <button class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;">Račun</button>
+            <div class="h-100">
+              <form th:action="@{/logout}" method="post">
+                <button
+                        class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
+                </button>
+              </form>
+              <div class="mt-5">
+                <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
+                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM</span>
+                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM</span>
+                </div>
+                <div class="container w-100 p-0">
+                  <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
+                    <p style="text-align: left; font-weight: bold; margin-bottom: 0px!important;">FINAL: <span style="float: right; font-weight: bold; margin-bottom: 0px!important;">4,00 KM</span>
+                  </div>
+                </div>
               </div>
-              </div>
-          </div>
-
             </div>
-          </div>
-
-
+            <div style="align-items: end;">
+              <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;">Račun</button>
+            </div>
           </div>
         </div>
+
       </div>
+
     </div>
   </div>
 </div>
-
+</div>
+</div>
+</div>
+</div>
 
 <script>
   const addValueButtons = document.getElementsByClassName('addValueButton');
@@ -330,61 +344,38 @@
   }
 
 
-  function showTopli() {
-    document.getElementById("topli").removeAttribute("hidden");
-    document.getElementById("bezalkoholna").setAttribute("hidden", "");
-    document.getElementById("alkoholna").setAttribute("hidden", "");
-    document.getElementById("piva").setAttribute("hidden", "");
-    document.getElementById("kokteli").setAttribute("hidden", "");
-    document.getElementById("vina").setAttribute("hidden", "");
-  }
-
-  function showBezalkoholna() {
-    document.getElementById("bezalkoholna").removeAttribute("hidden");
-    document.getElementById("topli").setAttribute("hidden", "");
-    document.getElementById("alkoholna").setAttribute("hidden", "");
-    document.getElementById("piva").setAttribute("hidden", "");
-    document.getElementById("kokteli").setAttribute("hidden", "");
-    document.getElementById("vina").setAttribute("hidden", "");
-  }
-
-  function showAlkoholna() {
-    document.getElementById("alkoholna").removeAttribute("hidden");
-    document.getElementById("topli").setAttribute("hidden", "");
-    document.getElementById("bezalkoholna").setAttribute("hidden", "");
-    document.getElementById("piva").setAttribute("hidden", "");
-    document.getElementById("kokteli").setAttribute("hidden", "");
-    document.getElementById("vina").setAttribute("hidden", "");
-  }
-
-  function showPiva() {
-    document.getElementById("piva").removeAttribute("hidden");
-    document.getElementById("topli").setAttribute("hidden", "");
-    document.getElementById("bezalkoholna").setAttribute("hidden", "");
-    document.getElementById("alkoholna").setAttribute("hidden", "");
-    document.getElementById("kokteli").setAttribute("hidden", "");
-    document.getElementById("vina").setAttribute("hidden", "");
-  }
-
-  function showKokteli() {
-    document.getElementById("kokteli").removeAttribute("hidden");
-    document.getElementById("topli").setAttribute("hidden", "");
-    document.getElementById("bezalkoholna").setAttribute("hidden", "");
-    document.getElementById("alkoholna").setAttribute("hidden", "");
-    document.getElementById("piva").setAttribute("hidden", "");
-    document.getElementById("vina").setAttribute("hidden", "");
-  }
-
-  function showVina() {
-    document.getElementById("vina").removeAttribute("hidden");
-    document.getElementById("topli").setAttribute("hidden", "");
-    document.getElementById("bezalkoholna").setAttribute("hidden", "");
-    document.getElementById("alkoholna").setAttribute("hidden", "");
-    document.getElementById("piva").setAttribute("hidden", "");
-    document.getElementById("kokteli").setAttribute("hidden", "");
+  function showMenu(category) {
+    const categories = ['topli', 'bezalkoholna', 'alkoholna', 'piva', 'kokteli', 'vina'];
+    for (const cat of categories) {
+      if (cat === category) {
+        document.getElementsByClassName(cat)[0].removeAttribute('hidden');
+      } else {
+        document.getElementsByClassName(cat)[0].setAttribute('hidden', '');
+      }
+    }
   }
 
 
+  const racunButton = document.getElementById("racun");
+  racunButton.addEventListener("click", function() {
+    const popup = document.createElement("div");
+    popup.style.backgroundColor= "#08576c";
+    popup.style.color = "black";
+    popup.style.fontSize = "xxx-large";
+    popup.style.padding = "30px";
+    popup.style.borderRadius = "10px";
+    popup.style.border = "20px solid black;";
+    popup.style.position = "fixed";
+    popup.style.top = "50%";
+    popup.style.left = "50%";
+    popup.style.transform = "translate(-50%, -50%)";
+    popup.innerText = "Račun se printa!";
+    document.body.appendChild(popup);
+    setTimeout(function() {
+      popup.remove();
+      document.querySelector('.mt-5').innerHTML = '';
+    }, 2000);
+  });
 
 
 </script>

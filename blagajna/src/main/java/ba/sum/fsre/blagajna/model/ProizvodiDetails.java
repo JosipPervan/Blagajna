@@ -2,7 +2,6 @@ package ba.sum.fsre.blagajna.model;
 
 import org.springframework.security.core.GrantedAuthority;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 
 public class ProizvodiDetails {
@@ -16,7 +15,7 @@ public class ProizvodiDetails {
         return proizvodi.naziv;
     }
 
-    public BigDecimal getCijena(){
+    public Double getCijena(){
         return proizvodi.cijena;
     }
 

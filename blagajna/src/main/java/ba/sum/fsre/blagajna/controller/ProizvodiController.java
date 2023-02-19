@@ -83,7 +83,7 @@ public class ProizvodiController {
             return "edit_proizvodi";
         }
 
-       proizvodiRepo.save(proizvodi);
+        proizvodiRepo.save(proizvodi);
         return "redirect:/proizvodi";
     }
 
