@@ -15,21 +15,21 @@ public class Proizvodi {
     @NotBlank(message = "Unesite naziv proizvoda.")
     String naziv;
 
-    @Column(length = 200, nullable = false)
-    @NotNull(message = "Unesite naziv kategorije.")
-    @Enumerated(EnumType.STRING)
-    private Kategorija kategorija;
-
     @Column(length = 50, nullable = false)
-    @NotBlank(message = "Molimo unesite cijenu proizvoda.")
+    @NotNull(message = "Molimo unesite cijenu proizvoda.")
     Double cijena;
 
+    @ManyToOne
+    @JoinColumn(name="kategorija_id", nullable=false)
+    @NotNull(message = "Molimo unesite cijenu proizvoda.")
+    private Kategorija kategorija;
+
     public Proizvodi(){}
-    public Proizvodi(Long id, String naziv, Kategorija kategorija, Double cijena) {
+    public Proizvodi(Long id, String naziv, Double cijena, Kategorija kategorija) {
         this.id = id;
         this.naziv = naziv;
-        this.kategorija = kategorija;
         this.cijena = cijena;
+        this.kategorija = kategorija;
     }
 
     public Long getId() {
@@ -48,14 +48,6 @@ public class Proizvodi {
         this.naziv = naziv;
     }
 
-    public Kategorija getKategorija() {
-        return kategorija;
-    }
-
-    public void setKategorija(Kategorija kategorija) {
-        this.kategorija = kategorija;
-    }
-
     public Double getCijena() {
         return cijena;
     }
@@ -64,7 +56,13 @@ public class Proizvodi {
         this.cijena = cijena;
     }
 
+    public Kategorija getKategorija() {
+        return kategorija;
+    }
 
+    public void setKategorija(Kategorija kategorija) {
+        this.kategorija = kategorija;
+    }
 }
 
 

@@ -25,14 +25,6 @@ public class KonobarController {
     @Autowired
     private KonobarRepository konobarRepo;
 
-    @GetMapping("/sucelje")
-    public String sucelje(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        KonobarDetails userDetails = (KonobarDetails) authentication.getPrincipal();
-        model.addAttribute("userDetails", userDetails);
-        return "sucelje";
-    }
-
     @GetMapping("/users")
     public String listUsers(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

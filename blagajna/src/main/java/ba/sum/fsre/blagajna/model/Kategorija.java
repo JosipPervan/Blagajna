@@ -1,21 +1,44 @@
 package ba.sum.fsre.blagajna.model;
 
-public enum Kategorija {
-    TOPLI("Topli napitci"),
-    BEZA("Bezalkoholna piće"),
-    ALKOHOL("Alkoholna pića"),
-    PIVA("Piva"),
-    KOKTELI("Kokteli"),
-    VINA("Vina");
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
-    private String displayName;
+import java.util.Set;
+@Entity
+@Table(name="kategorija")
+public class Kategorija {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    Long id;
 
-    Kategorija(String displayName) {
-        this.displayName = displayName;
+    @Column(length = 200, nullable = false)
+    @NotBlank(message = "Unesite naziv kategorije.")
+    String naziv;
+
+    @OneToMany(mappedBy="kategorija")
+    private Set<Proizvodi> proizvodi;
+
+    public Long getId() {
+        return id;
     }
 
-    @Override
-    public String toString() {
-        return displayName;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getNaziv() {
+        return naziv;
+    }
+
+    public void setNaziv(String naziv) {
+        this.naziv = naziv;
+    }
+
+    public Set<Proizvodi> getProizvodi() {
+        return proizvodi;
+    }
+
+    public void setProizvodi(Set<Proizvodi> proizvodi) {
+        this.proizvodi = proizvodi;
     }
 }

@@ -22,20 +22,13 @@
     </div>
 
     <div class="form-group row">
-      <label class="col-4 col-form-label">Uloga: </label>
+      <label class="col-4 col-form-label">Kategorija: </label>
       <div class="col-8">
-        <select th:unless="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control">
-          <option value="TOPLI">Topli napitci</option>
-          <option value="BEZA">Bezalkoholna piće</option>
-          <option value="ALKOHOL">Alkoholna pića</option>
-          <option value="PIVA">Piva</option>
-          <option value="KOKTELI">Kokteli</option>
-          <option value="VINA">Vina</option>
-
+        <select  th:unless="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control">
+          <option th:each="kategorija:${listKategorije}" th:value="${kategorija.getId()}"  th:text="${kategorija.getNaziv()}"></option>
         </select>
-        <select th:if="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control is-invalid">
-          <option value="konobar">Konobar</option>
-          <option value="admin">Admin</option>
+        <select  th:if="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control is-invalid">
+          <option th:each="kategorija:${listKategorije}" th:value="${kategorija.getId()}"  th:text="${kategorija.getNaziv()}"></option>
         </select>
         <div th:if="${#fields.hasErrors('kategorija')}" th:errors="*{kategorija}" class="invalid-feedback"></div>
       </div>

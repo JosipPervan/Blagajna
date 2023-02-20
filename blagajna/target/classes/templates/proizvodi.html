@@ -95,7 +95,7 @@
         <tr style="color:black; background-color: #9fc7d1;" th:each="proizvodi: ${listProizvodi}">
           <td th:text="${proizvodi.id}">Proizvod ID</td>
           <td th:text="${proizvodi.naziv}">Naziv</td>
-          <td th:text="${proizvodi.kategorija}">Kategorija</td>
+          <td th:text="${proizvodi.kategorija.getNaziv()}">Kategorija</td>
           <td th:text="${proizvodi.cijena}">Cijena</td>
           <td><a class="btn btn-info" th:href="@{/proizvodi/edit/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-pen-to-square">Uredi</i></a></td>
           <td><a class="btn btn-danger" th:href="@{/proizvodi/delete/{id}(id=${proizvodi.id})}"><i class="fa-solid fa-trash"></i>Izbriši</a></td>
