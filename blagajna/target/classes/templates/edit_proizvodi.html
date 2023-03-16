@@ -24,9 +24,12 @@
     <div class="form-group row">
       <label class="col-4 col-form-label">Kategorija: </label>
       <div class="col-8">
-        <input th:unless="${#fields.hasErrors('kategorija')}" type="text" th:field="*{kategorija}" class="form-control"/>
-        <input th:if="${#fields.hasErrors('kategorija')}" type="text" th:field="*{kategorija}"
-               class="form-control  is-invalid"/>
+        <select  th:unless="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control">
+          <option th:each="kategorija:${listKategorije}" th:value="${kategorija.getId()}"  th:text="${kategorija.getNaziv()}"></option>
+        </select>
+        <select  th:if="${#fields.hasErrors('kategorija')}" th:field="*{kategorija}" class="form-control is-invalid">
+          <option th:each="kategorija:${listKategorije}" th:value="${kategorija.getId()}"  th:text="${kategorija.getNaziv()}"></option>
+        </select>
         <div th:if="${#fields.hasErrors('kategorija')}" th:errors="*{kategorija}" class="invalid-feedback"></div>
       </div>
     </div>

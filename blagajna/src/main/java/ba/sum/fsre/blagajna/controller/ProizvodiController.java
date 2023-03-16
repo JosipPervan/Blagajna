@@ -2,6 +2,8 @@ package ba.sum.fsre.blagajna.controller;
 
 import ba.sum.fsre.blagajna.model.Proizvodi;
 import ba.sum.fsre.blagajna.model.KonobarDetails;
+import ba.sum.fsre.blagajna.model.Konobar;
+import ba.sum.fsre.blagajna.repositories.KategorijeRepository;
 import ba.sum.fsre.blagajna.repositories.ProizvodiRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +24,15 @@ public class ProizvodiController {
     @Autowired
     ProizvodiRepository proizvodiRepo;
 
+    @Autowired
+    KategorijeRepository kategorijeRepo;
+
     @GetMapping("proizvodi")
     public String listProizvodi (Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         KonobarDetails konobarDetails = (KonobarDetails) authentication.getPrincipal();
         model.addAttribute("userDetails", konobarDetails);
-        List<Proizvodi> listProizvodi = proizvodiRepo.findAll();
-        model.addAttribute("listProizvodi", listProizvodi);
+        model.addAttribute("listProizvodi", proizvodiRepo.findAll());
         model.addAttribute("activeLink", "Proizvodi");
         return "proizvodi";
     }
@@ -38,8 +42,9 @@ public class ProizvodiController {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         KonobarDetails konobarDetails = (KonobarDetails) authentication.getPrincipal();
         model.addAttribute("activeLink", "Proizvodi");
-        model.addAttribute("konobarDetails", konobarDetails);
+        model.addAttribute("userDetails", konobarDetails);
         model.addAttribute("proizvodi", new Proizvodi());
+        model.addAttribute("listKategorije", kategorijeRepo.findAll());
         return "add_proizvodi";
     }
 
@@ -67,6 +72,7 @@ public class ProizvodiController {
         model.addAttribute("activeLink", "Proizvodi");
         model.addAttribute("userDetails", konobarDetails);
         model.addAttribute("proizvodi", proizvodi);
+        model.addAttribute("listKategorije", kategorijeRepo.findAll());
         return "edit_proizvodi";
     }
 
@@ -80,6 +86,7 @@ public class ProizvodiController {
             model.addAttribute("activeLink", "Proizvodi");
             model.addAttribute("userDetails", konobarDetails);
             model.addAttribute("proizvodi", proizvodi);
+            model.addAttribute("listKategorije", kategorijeRepo.findAll());
             return "edit_proizvodi";
         }
 

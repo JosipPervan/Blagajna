@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Blagajna - Prijava na sustav</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
   <style>
     .split {
@@ -86,7 +87,7 @@
     }
 
     .pill-nav a.active {
-      background-image: linear-gradient(#074455 , #3dabb3 );
+      background-image: linear-gradient(#074455 , #3dabb3);
       color: white;
     }
 
@@ -102,11 +103,58 @@
       grid-gap: 5px;
     }
 
+    .popup{
+      width: 400px;
+      background: #fff;
+      border-radius: 6px;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      padding: 0 30px 30px;
+      color: #333;
+      transition: transform 0.4s, 0.4s;
+      visibility: hidden;
+    }
+
+    .open-popup{
+      visibility: visible;
+      top: 50%;
+      transform: translate(-50%, 50%) scale(1);
+    }
+
+
+    .popup h2{
+      font-size: 38px;
+      font-weight: 500;
+      margin: 30px 0 10px;
+    }
+
+    .popup button{
+      width: 100%;
+      margin-top: 50px;
+      padding: 10px 0;
+      background: linear-gradient(#08576c , #52b7be);
+      color: #fff;
+      outline: none;
+      border: 0;
+      font-size: 18px;
+      border-radius: 4px;
+      cursor: pointer;
+      box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+    }
+
+
+
+
 
   </style>
 </head>
 <body>
+
 <div class="pozadina">
+  <!-- Odavde pocinje main, iznad je sidebar-->
 
   <div class="split">
     <div class="container float-left p-3 vh-100">
@@ -118,26 +166,19 @@
                 <div class="col-12">
                   <div class="pill-nav">
                     <div class="razmak">
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()">Topli napitci</button>
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showBezalkoholna()">Bezalkoholna pića</button>
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showAlkoholna()">Alkoholna pića</button>
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showPiva()">Piva</button>
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showKokteli()">Kokteli</button>
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showVina()">Vina</button>
-                    </div>
+                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}" th:value="${kategorija.getId()}"></button>
+                      </div>
                   </div>
                 </div>
-              </div>
+              </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
             </div>
           </div>
 
-
-
-          <div class="topli">
+          <div th:id="${kategorija.id}" th:each="kategorija: ${listKategorije}">
             <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
-                  <div th:each="proizvod : ${proizvodi}" class="card">
+                  <div th:each="proizvod : ${kategorija.getProizvodi()}" class="card">
                     <img src="preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
@@ -291,6 +332,12 @@
         </div>
       </div>
 
+      <div class="popup" id="popup">
+        <h2>Uspješno!</h2>
+        <p>Račun se printa!</p>
+        <button id="okPopup" type="button" onclick="closePopup()">OK</button>
+      </div>
+
 
 
       <div class="split_right pt-3" style="position: fixed">
@@ -305,8 +352,8 @@
               </form>
               <div class="mt-5">
                 <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM</span>
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM</span>
+                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
+                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
                 </div>
                 <div class="container w-100 p-0">
                   <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
@@ -315,8 +362,10 @@
                 </div>
               </div>
             </div>
+
+
             <div style="align-items: end;">
-              <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;">Račun</button>
+              <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;" onclick="openPopup()"> Račun</button>
             </div>
           </div>
         </div>
@@ -356,26 +405,22 @@
   }
 
 
-  const racunButton = document.getElementById("racun");
-  racunButton.addEventListener("click", function() {
-    const popup = document.createElement("div");
-    popup.style.backgroundColor= "#08576c";
-    popup.style.color = "black";
-    popup.style.fontSize = "xxx-large";
-    popup.style.padding = "30px";
-    popup.style.borderRadius = "10px";
-    popup.style.border = "20px solid black;";
-    popup.style.position = "fixed";
-    popup.style.top = "50%";
-    popup.style.left = "50%";
-    popup.style.transform = "translate(-50%, -50%)";
-    popup.innerText = "Račun se printa!";
-    document.body.appendChild(popup);
+
+
+
+  function openPopup(){
+    let popup = document.getElementById("popup");
+    popup.style.visibility = "visible";
     setTimeout(function() {
-      popup.remove();
+      popup.style.visibility="hidden";
       document.querySelector('.mt-5').innerHTML = '';
     }, 2000);
-  });
+  }
+
+  function closePopup(){
+    popup.classList.remove("open-popup");
+  }
+
 
 
 </script>

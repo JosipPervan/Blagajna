@@ -2,7 +2,6 @@ package ba.sum.fsre.blagajna.controller;
 
 import ba.sum.fsre.blagajna.model.Konobar;
 import ba.sum.fsre.blagajna.model.KonobarDetails;
-import ba.sum.fsre.blagajna.model.Proizvodi;
 import ba.sum.fsre.blagajna.repositories.KonobarRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,6 @@ import java.util.Optional;
 public class KonobarController {
     @Autowired
     private KonobarRepository konobarRepo;
-
-    @GetMapping("/sucelje")
-    public String sucelje(Model model) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        KonobarDetails userDetails = (KonobarDetails) authentication.getPrincipal();
-        model.addAttribute("userDetails", userDetails);
-        return "sucelje";
-    }
 
     @GetMapping("/users")
     public String listUsers(Model model) {
