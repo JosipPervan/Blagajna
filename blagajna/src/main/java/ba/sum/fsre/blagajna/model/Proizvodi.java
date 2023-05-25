@@ -24,12 +24,24 @@ public class Proizvodi {
     @NotNull(message = "Molimo unesite cijenu proizvoda.")
     private Kategorija kategorija;
 
+    @Column(length = 200, nullable = true)
+    private String slika;
+
     public Proizvodi(){}
-    public Proizvodi(Long id, String naziv, Double cijena, Kategorija kategorija) {
+    public Proizvodi(Long id, String naziv, Double cijena, Kategorija kategorija, String slika) {
         this.id = id;
         this.naziv = naziv;
         this.cijena = cijena;
         this.kategorija = kategorija;
+        this.slika = slika;
+    }
+
+    public String getSlika() {
+        return slika;
+    }
+
+    public void setSlika(String slika) {
+        this.slika = slika;
     }
 
     public Long getId() {

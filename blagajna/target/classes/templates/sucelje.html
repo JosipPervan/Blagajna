@@ -118,12 +118,6 @@
       visibility: hidden;
     }
 
-    .open-popup{
-      visibility: visible;
-      top: 50%;
-      transform: translate(-50%, 50%) scale(1);
-    }
-
 
     .popup h2{
       font-size: 38px;
@@ -166,7 +160,7 @@
                 <div class="col-12">
                   <div class="pill-nav">
                     <div class="razmak">
-                      <button class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" onclick="showTopli()" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}" th:value="${kategorija.getId()}"></button>
+                      <a th:href="@{/sucelje/{id}(id=${kategorija.getId()})}" class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
                       </div>
                   </div>
                 </div>
@@ -174,12 +168,12 @@
             </div>
           </div>
 
-          <div th:id="${kategorija.id}" th:each="kategorija: ${listKategorije}">
+          <div class="container">
             <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
-                  <div th:each="proizvod : ${kategorija.getProizvodi()}" class="card">
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
+                  <div th:each="proizvod : ${selectedKategorija.getProizvodi()}" class="card">
+                    <img src="/preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
                         <span class="one" th:text="${proizvod.getNaziv()}"></span>
@@ -191,151 +185,20 @@
               </form>
             </div>
           </div>
-
-
-          <div class="bezalkoholna" hidden>
-            <div class=" justify-content-center align-items-center h-100">
-              <form>
-                <div class="grid-containerProizvodi">
-
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Jiuce</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Cedevita</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="piva" hidden>
-            <div class=" justify-content-center align-items-center h-100">
-              <form>
-                <div class="grid-containerProizvodi">
-
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Žuja</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Karlovačko</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="alkoholna" hidden>
-            <div class=" justify-content-center align-items-center h-100">
-              <form>
-                <div class="grid-containerProizvodi">
-
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Jeger</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Jack</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-          </div>
-
-          <div class="kokteli" hidden>
-            <div class=" justify-content-center align-items-center h-100">
-              <form>
-                <div class="grid-containerProizvodi">
-
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Mojito</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Jagerbomb</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-          </div>
-
-
-          <div class="vina" hidden>
-            <div class=" justify-content-center align-items-center h-100">
-              <form>
-                <div class="grid-containerProizvodi">
-
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Bijelo</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="card" >
-                    <img src="preuzmi.svg" class="card-img-top" alt="...">
-                    <div class="card-body" style=" height: 4rem;">
-                      <div>
-                        <span class="one">Crno</span><span class="two">2,00 KM</span>
-                      </div>
-                    </div>
-                  </div>
-
-                </div>
-              </form>
-            </div>
-          </div>
-
         </div>
+        </form>
       </div>
+    </div>
+  </div>
+</div>
+
+
+
 
       <div class="popup" id="popup">
         <h2>Uspješno!</h2>
         <p>Račun se printa!</p>
-        <button id="okPopup" type="button" onclick="closePopup()">OK</button>
+        <button id="okPopup" type="submit" onclick="closePopup()">OK</button>
       </div>
 
 
@@ -381,6 +244,8 @@
 </div>
 
 <script>
+
+
   const addValueButtons = document.getElementsByClassName('addValueButton');
 
   var setEmail = function() {
@@ -411,14 +276,11 @@
   function openPopup(){
     let popup = document.getElementById("popup");
     popup.style.visibility = "visible";
-    setTimeout(function() {
-      popup.style.visibility="hidden";
-      document.querySelector('.mt-5').innerHTML = '';
-    }, 2000);
   }
 
   function closePopup(){
-    popup.classList.remove("open-popup");
+    popup.style.visibility="hidden";
+    document.querySelector('.mt-5').innerHTML = '';
   }
 
 
