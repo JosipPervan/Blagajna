@@ -91,16 +91,13 @@
       color: white;
     }
 
-    .gb{
-      height: 3rem;
-      font-size: 15px;
-      border: 1px solid black;
-    }
-
     .razmak {
       display: grid;
       grid-template-columns: repeat(6, 2fr);
       grid-gap: 5px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      height: 75px;
     }
 
     .popup{
@@ -157,18 +154,18 @@
           <div class="container vis" style="background-color: #95c0cc">
             <div class="col-12">
               <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
-                <div class="col-12">
-                  <div class="pill-nav">
-                    <div class="razmak">
-                      <a th:href="@{/sucelje/{id}(id=${kategorija.getId()})}" class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
+                <div class="col-12 p-0" style="height: 76px">
+                  <div class="pill-nav p-0" style="height: 76px">
+                    <div class="btn-group justify-content-center align-items-center w-100" style="margin-top: 10px">
+                      <a th:href="@{/sucelje/{id}/{racun_id}(id=${kategorija.getId()},racun_id=${selectedRacun.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
                       </div>
                   </div>
                 </div>
-              </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
+              </div>
             </div>
           </div>
 
-          <div class="container">
+          <div class="container p-0">
             <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
@@ -176,8 +173,9 @@
                     <img src="/preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one" th:text="${proizvod.getNaziv()}"></span>
-                        <span class="two" th:text="${proizvod.getCijena()} + ' KM'"></span>
+                        <span class="one" style="font-size: medium" th:text="${proizvod.getNaziv()}"></span>
+                        <span class="two" style="font-size: medium" th:text="${proizvod.getCijena()} + ' KM'"></span>
+                        <a th:href="@{/sucelje_add/{racun_id}/{proizvod_id}(racun_id=${selectedRacun.getId()}, proizvod_id=${proizvod.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );">Dodaj</a>
                       </div>
                     </div>
                   </div>
@@ -215,8 +213,9 @@
               </form>
               <div class="mt-5">
                 <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
+                  <p style="text-align: left" th:each="rp : ${selectedRacun.getRacunProizvodi()}">
+                    <span th:text="${rp.getProizvod().getNaziv()}"></span>
+                    <span style="float:right;" th:text="${rp.getProizvod().getCijena()} + ' KM'"> <i class="fa-solid fa-trash"></i></span>
                 </div>
                 <div class="container w-100 p-0">
                   <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
