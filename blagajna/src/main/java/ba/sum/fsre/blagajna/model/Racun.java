@@ -30,14 +30,4 @@ public class Racun {
         this.id = id;
     }
 
-    @OneToMany(mappedBy = "racun", cascade = CascadeType.ALL)
-    private List<RacunProizvod> racunProizvodi;
-
-    public List<RacunProizvod> getRacunProizvodi() {
-        return racunProizvodi;
-    }
-
-    public void setRacunProizvodi(List<RacunProizvod> racunProizvodi) {
-        this.racunProizvodi = racunProizvodi;
-    }
 }

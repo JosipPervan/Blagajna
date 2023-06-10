@@ -136,10 +136,6 @@
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     }
 
-
-
-
-
   </style>
 </head>
 <body>
@@ -154,18 +150,18 @@
           <div class="container vis" style="background-color: #95c0cc">
             <div class="col-12">
               <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
-                <div class="col-12 p-0" style="height: 76px">
-                  <div class="pill-nav p-0" style="height: 76px">
-                    <div class="btn-group justify-content-center align-items-center w-100" style="margin-top: 10px">
-                      <a th:href="@{/sucelje/{id}/{racun_id}(id=${kategorija.getId()},racun_id=${selectedRacun.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
+                  <div class="col-12 p-0" style="height: 76px">
+                    <div class="pill-nav p-0" style="height: 76px">
+                      <div class="btn-group justify-content-center align-items-center w-100" style="margin-top: 10px">
+                        <a th:href="@{/sucelje/{id}(id=${kategorija.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
                       </div>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
 
-          <div class="container p-0">
+        <div class="container p-0">
             <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
@@ -173,9 +169,8 @@
                     <img src="/preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one" style="font-size: medium" th:text="${proizvod.getNaziv()}"></span>
-                        <span class="two" style="font-size: medium" th:text="${proizvod.getCijena()} + ' KM'"></span>
-                        <a th:href="@{/sucelje_add/{racun_id}/{proizvod_id}(racun_id=${selectedRacun.getId()}, proizvod_id=${proizvod.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );">Dodaj</a>
+                        <span class="one" th:text="${proizvod.getNaziv()}"></span>
+                        <span class="two" th:text="${proizvod.getCijena()} + ' KM'"></span>
                       </div>
                     </div>
                   </div>
@@ -193,49 +188,48 @@
 
 
 
-      <div class="popup" id="popup">
-        <h2>Uspješno!</h2>
-        <p>Račun se printa!</p>
-        <button id="okPopup" type="submit" onclick="closePopup()">OK</button>
-      </div>
+<div class="popup" id="popup">
+  <h2>Uspješno!</h2>
+  <p>Račun se printa!</p>
+  <button id="okPopup" type="submit" onclick="closePopup()">OK</button>
+</div>
 
 
 
-      <div class="split_right pt-3" style="position: fixed">
-        <div class="container float-right h-100 justify-content-center align-items-center">
-          <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
+<div class="split_right pt-3" style="position: fixed">
+  <div class="container float-right h-100 justify-content-center align-items-center">
+    <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
 
-            <div class="h-100">
-              <form th:action="@{/logout}" method="post">
-                <button
-                        class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
-                </button>
-              </form>
-              <div class="mt-5">
-                <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
-                  <p style="text-align: left" th:each="rp : ${selectedRacun.getRacunProizvodi()}">
-                    <span th:text="${rp.getProizvod().getNaziv()}"></span>
-                    <span style="float:right;" th:text="${rp.getProizvod().getCijena()} + ' KM'"> <i class="fa-solid fa-trash"></i></span>
-                </div>
-                <div class="container w-100 p-0">
-                  <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
-                    <p style="text-align: left; font-weight: bold; margin-bottom: 0px!important;">FINAL: <span style="float: right; font-weight: bold; margin-bottom: 0px!important;">4,00 KM</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-            <div style="align-items: end;">
-              <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;" onclick="openPopup()"> Račun</button>
+      <div class="h-100">
+        <form th:action="@{/logout}" method="post">
+          <button
+                  class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
+          </button>
+        </form>
+        <div class="mt-5">
+          <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
+            <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
+            <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
+          </div>
+          <div class="container w-100 p-0">
+            <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
+              <p style="text-align: left; font-weight: bold; margin-bottom: 0px!important;">FINAL: <span style="float: right; font-weight: bold; margin-bottom: 0px!important;">4,00 KM</span>
             </div>
           </div>
         </div>
-
       </div>
 
+
+      <div style="align-items: end;">
+        <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;" onclick="openPopup()"> Račun</button>
+      </div>
     </div>
   </div>
+
+</div>
+
+</div>
+</div>
 </div>
 </div>
 </div>
