@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name="proizvodi")
 public class Proizvodi {
@@ -36,13 +39,6 @@ public class Proizvodi {
         this.slika = slika;
     }
 
-    public String getSlika() {
-        return slika;
-    }
-
-    public void setSlika(String slika) {
-        this.slika = slika;
-    }
 
     public Long getId() {
         return id;
@@ -75,6 +71,15 @@ public class Proizvodi {
     public void setKategorija(Kategorija kategorija) {
         this.kategorija = kategorija;
     }
+
+    public String getSlika() {
+        return slika;
+    }
+
+    public void setSlika(String slika) {
+        this.slika = slika;
+    }
+
 }
 
 

@@ -91,16 +91,13 @@
       color: white;
     }
 
-    .gb{
-      height: 3rem;
-      font-size: 15px;
-      border: 1px solid black;
-    }
-
     .razmak {
       display: grid;
       grid-template-columns: repeat(6, 2fr);
       grid-gap: 5px;
+      margin-bottom: 15px;
+      padding-bottom: 10px;
+      height: 75px;
     }
 
     .popup{
@@ -139,16 +136,11 @@
       box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
     }
 
-
-
-
-
   </style>
 </head>
 <body>
 
 <div class="pozadina">
-  <!-- Odavde pocinje main, iznad je sidebar-->
 
   <div class="split">
     <div class="container float-left p-3 vh-100">
@@ -157,29 +149,31 @@
           <div class="container vis" style="background-color: #95c0cc">
             <div class="col-12">
               <div class="row gumb justify-content-center align-items-center w-100 ml-1 pl-1" >
-                <div class="col-12">
-                  <div class="pill-nav">
-                    <div class="razmak">
-                      <a th:href="@{/sucelje/{racun_id}/{id}(id=${kategorija.getId(), id=racun.getId()})}" class="btn btn-info gb" style="background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
+                  <div class="col-12 p-0" style="height: 76px">
+                    <div class="pill-nav p-0" style="height: 76px">
+                      <div class="btn-group justify-content-center align-items-center w-100" style="margin-top: 10px">
+                        <a th:href="@{/sucelje/{id}/{id_racun}(id=${kategorija.getId()}, id_racun=${selectedRacun.getId()})}" class="mr-1 ml-1" style="border-radius: 6px; color: whitesmoke; width: 190px; background-image: linear-gradient(#08576c , #52b7be );" th:each="kategorija: ${listKategorije}" th:text="${kategorija.getNaziv()}"></a>
                       </div>
+                    </div>
                   </div>
                 </div>
-              </div> <!-- Broj 8... ide do 12 i odreduje sirinu-->
+              </div>
             </div>
-          </div>
 
-          <div class="container">
+        <div class="container p-0">
             <div class="justify-content-center align-items-center h-100">
               <form>
                 <div class="grid-containerProizvodi" style="border: black solid 2px; border-radius: 10px">
+
                   <div th:each="proizvod : ${selectedKategorija.getProizvodi()}" class="card">
+                  <a th:href="@{/racun/dodaj/{id_racun}/{id_proizvod}(id_racun=${selectedRacun.getId()}, id_proizvod=${proizvod.getId()})}">
                     <img src="/preuzmi.svg" class="card-img-top" alt="...">
                     <div class="card-body" style=" height: 4rem;">
                       <div>
-                        <span class="one" th:text="${proizvod.getNaziv()}"></span>
-                        <span class="two" th:text="${proizvod.getCijena()} + ' KM'"></span>
+                        <span class="one" th:text="${proizvod.getNaziv()} + ' ' + ${proizvod.getCijena()} + ' KM'"></span>
                       </div>
                     </div>
+                  </a>
                   </div>
                 </div>
               </form>
@@ -195,55 +189,59 @@
 
 
 
-      <div class="popup" id="popup">
-        <h2>Uspješno!</h2>
-        <p>Račun se printa!</p>
-        <button id="okPopup" type="submit" onclick="closePopup()">OK</button>
-      </div>
+<div class="popup" id="popup">
+  <h2>Uspješno!</h2>
+  <p>Račun se printa!</p>
+  <button id="okPopup" type="submit" onclick="closePopup()">OK</button>
+</div>
 
 
 
-      <div class="split_right pt-3" style="position: fixed">
-        <div class="container float-right h-100 justify-content-center align-items-center">
-          <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
+<div class="split_right pt-3" style="position: fixed">
+  <div class="container float-right h-100 justify-content-center align-items-center">
+    <div class="d-flex flex-column flex-shrink-0 px-3 pt-3 h-100 w-100" style="border: black solid 2px; border-radius: 10px; background-color: #95c0cc">
 
-            <div class="h-100">
-              <form th:action="@{/logout}" method="post">
-                <button
-                        class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
-                </button>
-              </form>
-              <div class="mt-5">
-                <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
-                  <p style="text-align: left">Juice <span style="float:right;">2,00 KM <i class="fa-solid fa-trash"></i></span>
-                </div>
-                <div class="container w-100 p-0">
-                  <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
-                    <p style="text-align: left; font-weight: bold; margin-bottom: 0px!important;">FINAL: <span style="float: right; font-weight: bold; margin-bottom: 0px!important;">4,00 KM</span>
-                  </div>
-                </div>
-              </div>
+      <div class="h-100">
+        <form th:action="@{/logout}" method="post">
+          <button
+                  class="vis btn btn-success d-block addValueButton btn-block gumb" style="color: whitesmoke; background-image: linear-gradient(#08576c , #52b7be ); font-size: xx-large;"  th:text="${userDetails.getFullName()}">
+          </button>
+        </form>
+        <div class="mt-5">
+          <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
+            <div class="w-100 mb-auto" style="font-size: x-large; border-bottom: solid 2px black;">
+              <p style="text-align: left" th:each="pnr : ${proizvodiNaRacunu}">
+                <span th:text="${pnr.getProizvodi().getNaziv()}"></span> x <span th:text="${pnr.getKolicina()}"></span>
+                <span style="float:right;" th:text="${pnr.getProizvodi().getCijena() * pnr.getKolicina()} + ' KM'"> <i class="fa-solid fa-trash"></i></span>
+              </p>
             </div>
-
-
-            <div style="align-items: end;">
-              <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3" style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;" onclick="openPopup()"> Račun</button>
+          </div>
+          <div class="container w-100 p-0">
+            <div class="mt-5" style="margin-bottom: 0px!important; border-bottom: black solid 4px; font-size: xx-large;">
+              <p style="text-align: left; font-weight: bold; margin-bottom: 0px!important;">FINAL: <span style="float: right; font-weight: bold; margin-bottom: 0px!important;"><span th:text="${ukupnaCijena}"></span> KM</span></p>
             </div>
           </div>
         </div>
-
       </div>
 
+
+      <div style="align-items: end;">
+        <form th:action="@{/logout}" method="post">
+          <button id="racun" class="vis btn btn-info d-block addValueButton btn-block gumb mb-3"
+                  style="background-color: whitesmoke; color: black; font-size: xx-large; margin-top: 10px;">
+            Račun</button></form>
+      </div>
     </div>
   </div>
-</div>
-</div>
-</div>
-</div>
+
 </div>
 
+
+
+
+<script th:src="@{/js/quantity_control.js}"></script>
 <script>
+
 
 
   const addValueButtons = document.getElementsByClassName('addValueButton');
@@ -256,22 +254,6 @@
   for (var i = 0; i < addValueButtons.length; i++) {
     addValueButtons[i].addEventListener('click', setEmail, false);
   }
-
-
-  function showMenu(category) {
-    const categories = ['topli', 'bezalkoholna', 'alkoholna', 'piva', 'kokteli', 'vina'];
-    for (const cat of categories) {
-      if (cat === category) {
-        document.getElementsByClassName(cat)[0].removeAttribute('hidden');
-      } else {
-        document.getElementsByClassName(cat)[0].setAttribute('hidden', '');
-      }
-    }
-  }
-
-
-
-
 
   function openPopup(){
     let popup = document.getElementById("popup");
