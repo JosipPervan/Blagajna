@@ -1,20 +1,20 @@
 version: '3.7'
 services:
-  Blagajna:
-    container_name: Blagajna
+  blagajna:
+    container_name: blagajna
     build: .
     image: blagajna:latest
     ports:
       - 80:8080
     networks:
-      - Blagajna-network
+      - blagajna-network
     depends_on:
       - mysql
   mysql:
     image: mysql:latest
     command: --character-set-server=utf8 --collation-server=utf8_general_ci
     networks:
-      - Blagajna-network
+      - blagajna-network
     environment:
       - MYSQL_ROOT_PASSWORD=lozinka
       - MYSQL_DATABASE=database
@@ -24,5 +24,5 @@ services:
 volumes:
   mysql-data:
 networks:
-  Blagajna-network:
+  blagajna-network:
     driver: bridge
