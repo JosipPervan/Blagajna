@@ -3,8 +3,8 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean package -DskipTests
 
-FROM openjdk:18-jdk-slim
 
+FROM openjdk:18-jdk-slim
 COPY --from=build /home/app/target/blagajna-0.0.1-SNAPSHOT.jar /app/blagajna.jar
 RUN mkdir /app/uploads
 WORKDIR /app
